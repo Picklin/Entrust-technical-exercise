@@ -4,13 +4,20 @@ import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ItemEvent;
-
+/**
+ * Class consisting in the view when we are selecting the document to paginate
+ * @author Martin Viteri
+ * @version 1.0, 9/07/24
+ */
 public class FileSelectionView extends JPanel {
     public FileSelectionView() {
+        //to have the elements better organized
         setLayout(new BorderLayout());
 
+        //a subpanel where we can put elements freely
         JPanel panel = new JPanel(null);
 
+        //fields to fill
         JTextField pathInput = new PlaceholderTextField("input txt file path *");
         JTextField pathOutput = new PlaceholderTextField("directory where you want to save your document *");
         JTextField documentName = new PlaceholderTextField("document name");
@@ -21,6 +28,7 @@ public class FileSelectionView extends JPanel {
         panel.add(pathOutput);
         panel.add(documentName);
 
+        //buttons to help fill the fields above by opening a file/directory chooser
         JButton pIButton = new JButton("Browse File");
         JButton pOButton = new JButton("Browse Dir");
         pIButton.setBounds(420, 80, 120, 20);
@@ -28,6 +36,7 @@ public class FileSelectionView extends JPanel {
         panel.add(pIButton);
         panel.add(pOButton);
 
+        //extension the output file will have
         final String[] extension = {".txt"};
         String[] extensions = {".txt", ".pdf"};
         JComboBox<String> extensionChooser = new JComboBox<>(extensions);
@@ -40,6 +49,8 @@ public class FileSelectionView extends JPanel {
             }
         });
 
+        //message shown when the file is created or when an error occurs
+        //in case an error happens the message will be changed below
         JLabel resultMsg = new JLabel("Document successfully created!");
         resultMsg.setBounds(60, 250, 600, 30);
         resultMsg.setForeground(Color.GREEN);
@@ -51,6 +62,7 @@ public class FileSelectionView extends JPanel {
         JButton paginateButton = new JButton("Paginate!");
         add(paginateButton, BorderLayout.SOUTH);
 
+        //file chooser to choose the input document
         pIButton.addActionListener(event -> {
             JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
             chooser.setDialogTitle("Select the txt file");
@@ -62,6 +74,7 @@ public class FileSelectionView extends JPanel {
                 pathInput.setText(path);
             }
         });
+        //directory chooser to choose the destination directory
         pOButton.addActionListener(event -> {
             JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
             chooser.setDialogTitle("Select the directory to save the document");
@@ -75,6 +88,8 @@ public class FileSelectionView extends JPanel {
         });
         paginateButton.addActionListener(event -> {
             try {
+                //make sure every field except the name of the document is filled
+                //the document has a default name "output"
                 if (pathInput.getForeground().equals(Color.BLACK) && pathOutput.getForeground().equals(Color.BLACK)) {
                     if (documentName.getForeground().equals(Color.BLACK))
                         PresentationCtrl.getInstance().paginate(pathInput.getText(), pathOutput.getText(), documentName.getText(), extension[0]);

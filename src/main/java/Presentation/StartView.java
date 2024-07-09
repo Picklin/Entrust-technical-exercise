@@ -2,7 +2,11 @@ package Presentation;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ *
+ * @author Martin Viteri
+ * @version 1.0, 9/07/24
+ */
 public class StartView extends JPanel {
     public StartView(Window mainWindow) {
         setLayout(new BorderLayout());

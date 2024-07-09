@@ -10,6 +10,11 @@ import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.layout.Document;
 
+/**
+ * Class dedicated to handle the things we want at the end of each page in a pdf file
+ * @author Martin Viteri
+ * @version 1.0, 9/07/24
+ */
 public class FooterLineEventHandler implements IEventHandler {
     final private Document doc;
     public FooterLineEventHandler(Document doc) {

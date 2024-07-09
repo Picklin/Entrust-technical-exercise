@@ -1,7 +1,11 @@
 import Presentation.PresentationCtrl;
 
 import java.awt.*;
-
+/**
+ *
+ * @author Martin Viteri
+ * @version 1.0, 9/07/24
+ */
 public class Main {
     public static void main(String[] args) {
         Point UpRightCorner = new Point(600, 300);

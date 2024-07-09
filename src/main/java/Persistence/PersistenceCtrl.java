@@ -11,7 +11,12 @@ import com.itextpdf.layout.property.AreaBreakType;
 
 import java.io.*;
 import java.util.List;
-
+/**
+ * Layer dedicated to the creation and saving of documents
+ * As the other layers, it has the controller and singleton patterns to ensure cohesiveness and abstraction
+ * @author Martin Viteri
+ * @version 1.0, 9/07/24
+ */
 public class PersistenceCtrl {
     private static PersistenceCtrl instance;
     private PersistenceCtrl() {}
@@ -21,9 +26,16 @@ public class PersistenceCtrl {
         }
         return instance;
     }
-    public boolean isCorrectFileType(String fileName, String expectedExtension) {
+    private boolean isCorrectFileType(String fileName, String expectedExtension) {
         return fileName.endsWith(expectedExtension);
     }
+    /**
+     * Method to read a Document from the path indicated
+     * @param pathInput path were the document is located
+     * @return a String with the content of the first line of the document
+     * @exception Exception throws an exception in case the document has the wrong extension
+     * @see Persistence.PersistenceCtrl#readDoc(String) 
+     */
     public String readDoc(String pathInput) throws Exception {
         String content;
         if (isCorrectFileType(pathInput, ".txt")) {
@@ -37,6 +49,14 @@ public class PersistenceCtrl {
         else throw new Exception("Wrong file extension");
         return content;
     }
+    /**
+     * Creates the pdf file from the content of the parameters
+     * @param pages a list of lists of strings with the content
+     * @param pathDirSave the path to save the resulting document
+     * @param nameDoc the name of the resulting document
+     * @exception FileNotFoundException in case the directory in pathDirSave doesn't exist
+     * @see Persistence.PersistenceCtrl#createPDF(List, String, String) 
+     */
     public void createPDF(List<List<String>> pages, String pathDirSave, String nameDoc) throws FileNotFoundException {
         PdfWriter writer = new PdfWriter(pathDirSave + '/' + nameDoc + ".pdf");
         PdfDocument pdf = new PdfDocument(writer);
@@ -56,7 +76,15 @@ public class PersistenceCtrl {
         }
         doc.close();
     }
-    public void createTXT(List<List<String>> pages, String pathDirSave, String nameDoc) throws IOException {
+    /**
+     * Creates the txt file from the content of the parameters
+     * @param pages a list of lists of strings with the content
+     * @param pathDirSave the path to save the resulting document
+     * @param nameDoc the name of the resulting document
+     * @exception FileNotFoundException in case the directory in pathDirSave doesn't exist
+     * @see Persistence.PersistenceCtrl#createTXT(List, String, String)
+     */
+    public void createTXT(List<List<String>> pages, String pathDirSave, String nameDoc) throws FileNotFoundException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathDirSave + '/' + nameDoc + ".txt"))) {
             int pageNum = 1;
             for (List<String> page : pages) {
@@ -70,8 +98,7 @@ public class PersistenceCtrl {
                 ++pageNum;
             }
         } catch (IOException e) {
-            throw e;
+            throw new FileNotFoundException("Directory doesn't exist");
         }
-
     }
 }
