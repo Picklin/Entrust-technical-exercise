@@ -10,3 +10,5 @@ You will need the java development kit (it includes the JRE, for executing appli
 # How to run it:
   1. Download the jar file located in out/artifacts/pagination_jar/pagination.jar
   2. Execute: java -jar pagination.jar
+
+You can check the *index.html* at the *javadoc* folder to see information about the classes and methods used in this application 
