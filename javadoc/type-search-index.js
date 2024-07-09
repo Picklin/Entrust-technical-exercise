@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"Domain","l":"DomainCtrl"},{"p":"Presentation","l":"FileSelectionView"},{"p":"Persistence","l":"FooterLineEventHandler"},{"p":"<Unnamed>","l":"Main"},{"p":"Persistence","l":"PersistenceCtrl"},{"p":"Presentation","l":"PresentationCtrl"},{"p":"Presentation","l":"StartView"},{"p":"Presentation","l":"Window"}]
